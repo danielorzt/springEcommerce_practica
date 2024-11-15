@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://thymeLeaf.org">
+
+<head th:insert="~{usuario/template_user.html::head}">
+
+</head>
+
+<body class="index-page">
+
+	<div th:insert="~{usuario/template_user.html::header}" th:if="${sesion == null}"></div>
+	<div th:insert="~{usuario/template_user.html::usuarioCabecera}" th:unless="${sesion == null}"></div>
+
+	<section><!--Buscador--> </section>
+
+	<main class="main"></main>
+	<p>hola mundo!!</p>
+
+	<div th:insert="~{usuario/template_user.html::footer}"></div>
+
+	<!-- Scroll Top -->
+	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Preloader -->
+	<div id="preloader"></div>
+
+	<div th:insert="~{usuario/template_user.html::jsFiles}"></div>
+
+</body>
+
+</html>

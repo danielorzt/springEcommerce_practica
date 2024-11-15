@@ -9,7 +9,7 @@ import com.sena.ecommerce.model.Usuario;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-	Optional<Usuario> finByEmail(String email);
+	Optional<Usuario> findByEmail(String email);
 
-	Optional<Usuario> finByUserName(String username);
+	Optional<Usuario> findByUsername(String username);
 }

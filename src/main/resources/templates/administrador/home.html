@@ -5,34 +5,48 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <div th:insert="~{administrador/templete_Admin::header}"></div>
-  <!-- End Header -->
+	<!-- ======= Header ======= -->
+	<div th:insert="~{administrador/templete_Admin::header}"></div>
+	<!-- End Header -->
 
-  <main id="main" class="main">
+	<main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+		<div class="pagetitle">
+			<h1>Dashboard</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Dashboard</li>
+				</ol>
+			</nav>
+		</div><!-- End Page Title -->
 
-    <section class="section dashboard">
-     
-    </section>
+		<section class="section dashboard">
+			<div class="row align-items-top"><!--div 1-->
+				<div class="col-lg-4" th:each="producto: ${productos}"><!--div 2-->
+					<div class="card">
+						<img th:src="@{/images/{img} (img=${producto.imagen})}" class="card-img-top"
+							th:alt="${producto.nombre}">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${producto.nombre}"></h5>
+							<p class="card-text" th:text="${producto.descripcion}"></p>
+						</div>
+					</div>
 
-  </main><!-- End #main -->
+				</div>
+			</div>
+		</section>
 
-  <div th:insert="~{administrador/templete_Admin.html::footer}"></div>
+	</main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	<div th:insert=" ~{administrador/templete_Admin.html::footer}">
+	</div>
 
-  <div th:insert="~{administrador/templete_Admin.html::jsFiles}"></div>
-  
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<div th:insert="~{administrador/templete_Admin.html::jsFiles}"></div>
+
 </body>
 
 </html>
