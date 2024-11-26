@@ -1,6 +1,7 @@
 package com.sena.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sena.ecommerce.model.DetalleOrden;
 import com.sena.ecommerce.model.Orden;
 import com.sena.ecommerce.model.Producto;
+import com.sena.ecommerce.model.Usuario;
+import com.sena.ecommerce.service.IDetalleOrdenService;
+import com.sena.ecommerce.service.IOrdenService;
 import com.sena.ecommerce.service.IProductoService;
+import com.sena.ecommerce.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/") // la raiz del proyecto
@@ -31,6 +36,15 @@ public class HomeUserController {
 	// Instancia de objeto - servicio
 	@Autowired
 	private IProductoService productoService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
+	
+	@Autowired
+	private IDetalleOrdenService detalleOrdenService;
 
 	// List y Orden son dos variables propias de esta clase
 	// Lista de detalles de la orden para guardarlos en la db
@@ -123,9 +137,44 @@ public class HomeUserController {
 	}
 
 	// metodo para redirijir al carrito sin producto
+	@GetMapping("/getCart")
 	public String getCart(Model model) {
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "/usuario/carrito";
 	}
+	//Este es el metodo para pasar a la vista del resumen de la orden
+	@GetMapping("/order")
+	public String order(Model model) {
+		Usuario u = usuarioService.findById(1).get();
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", u);
+		return "usuario/resumenorden";
+	}
+	
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		//Guardar orden
+		Date fechaCreacion = new Date();
+		orden.setFechacreacion(fechaCreacion);
+		orden.setNumero(ordenService.generarNumeroOrden());
+		//Usuario que se referenci en esa compra previamente logeado
+		Usuario u = usuarioService.findById(1).get();
+		orden.setUsuario(u);
+		ordenService.save(orden);
+		//Guardar detalles de la orden
+		for (DetalleOrden dt: detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+		}
+		//Limpiar valores que no se añadan a la orden recien guardada
+		orden = new Orden();
+		detalles.clear();
+		return "redirect:/";
+	}
+	
+	
+	
+	
 }

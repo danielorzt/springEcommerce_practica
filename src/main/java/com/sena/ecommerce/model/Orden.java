@@ -19,8 +19,8 @@ public class Orden {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String numero;
-	private Date fehchacreacion;
-	private Date fehcharecibida;
+	private Date fechacreacion;
+	private Date fecharecibida;
 	private Double total;
 
 	@ManyToOne
@@ -33,12 +33,12 @@ public class Orden {
 
 	}
 
-	public Orden(Integer id, String numero, Date fehchacreacion, Date fehcharecibida, Double total) {
+	public Orden(Integer id, String numero, Date fechacreacion, Date fecharecibida, Double total) {
 		super();
 		this.id = id;
 		this.numero = numero;
-		this.fehchacreacion = fehchacreacion;
-		this.fehcharecibida = fehcharecibida;
+		this.fechacreacion = fechacreacion;
+		this.fecharecibida = fecharecibida;
 		this.total = total;
 	}
 
@@ -58,20 +58,20 @@ public class Orden {
 		this.numero = numero;
 	}
 
-	public Date getFehchacreacion() {
-		return fehchacreacion;
+	public Date getFechacreacion() {
+		return fechacreacion;
 	}
 
-	public void setFehchacreacion(Date fehchacreacion) {
-		this.fehchacreacion = fehchacreacion;
+	public void setFechacreacion(Date fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
-	public Date getFehcharecibida() {
-		return fehcharecibida;
+	public Date getFecharecibida() {
+		return fecharecibida;
 	}
 
-	public void setFehcharecibida(Date fehcharecibida) {
-		this.fehcharecibida = fehcharecibida;
+	public void setFecharecibida(Date fecharecibida) {
+		this.fecharecibida = fecharecibida;
 	}
 
 	public Double getTotal() {
@@ -81,11 +81,19 @@ public class Orden {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Override
 	public String toString() {
-		return "Orden [id=" + id + ", numero=" + numero + ", fehchacreacion=" + fehchacreacion + ", fehcharecibida="
-				+ fehcharecibida + ", total=" + total + "]";
+		return "Orden [id=" + id + ", numero=" + numero + ", fechacreacion=" + fechacreacion + ", fecharecibida="
+				+ fecharecibida + ", total=" + total + "]";
 	}
 
 }
