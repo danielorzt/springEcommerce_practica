@@ -98,7 +98,7 @@
 									class="bi bi-chevron-down toggle-dropdown"></i></a>
 							<ul>
 								<li><a href="#">Crear producto</a></li>
-								<li><a href="#">Actualizar producto</a></li>
+								<li><a href="#">Actualizar Producto</a></li>
 							</ul>
 						</li>
 						<li><a th:href="@{/usuario/compras}">Compras</a></li>
@@ -112,6 +112,14 @@
 		<a class="btn-getstarted" th:href="@{/usuario/cerrar}">Close <i class="bi bi-box-arrow-in-right"></i></a>
 
 	</div>
+</div>
+
+<div th:fragment="search">
+	<form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
+		<input class="form-control mr-sm-2" type="search" placeholder="Buscar un producto" aria-label="Search"
+			name="nombre" autocomplete="off">
+		<button class="btn btn-outline-primary my-2 my-sm-0" type="submit"> Buscar <i class="bi bi-search"></i></button>
+	</form>
 </div>
 
 <div th:fragment="footer">

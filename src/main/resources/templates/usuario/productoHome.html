@@ -26,17 +26,44 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-6">
-							<a href="#"><img class="img-fluid rounded" th:src="@{/images/{img} (img=${producto.imagen})}"
-									th:alt="${producto.nombre}"></a>
+							<a href="#"><img class="img-fluid rounded"
+									th:src="@{/images/{img} (img=${producto.imagen})}" th:alt="${producto.nombre}"></a>
 						</div>
 
-						<div class="col-lg-6">
+						<div th:if="${sesion == null}" class="col-lg-6">
 							<form th:action="@{/cart}" method="post">
 								<input type="hidden" th:value="${producto.id}" name="id">
 								<h2 class="card-title" th:text="${producto.nombre}"></h2>
 								<ul class="list-group">
 									<li class="list-group-item">
-										<h5 th:text="'Precio: ' + ${#strings.concat('$', #numbers.formatDecimal(producto.precio, 0, 'POINT',0, 'POINT'))}"></h5>
+										<h5
+											th:text="'Precio: ' + ${#strings.concat('$', #numbers.formatDecimal(producto.precio, 0, 'POINT',0, 'POINT'))}">
+										</h5>
+									</li>
+									<li class="list-group-item">
+										<p th:text="'Descripcion: ' + ${producto.descripcion}"></p>
+									</li>
+									<li class="list-group-item">
+										<h6>
+											Cantidad: <input type="number" id="cantidad" name="cantidad"
+												autocomplete="off" min="1" th:max="${producto.cantidad}" value="1">
+										</h6>
+									</li>
+								</ul>
+								<a th:href="@{/usuario/login}"><button type="button" class="btn btn-dark">Añadir al
+										carrito</button></a>
+
+							</form>
+						</div>
+						<div th:unless="${sesion == null}" class="col-lg-6">
+							<form th:action="@{/cart}" method="post">
+								<input type="hidden" th:value="${producto.id}" name="id">
+								<h2 class="card-title" th:text="${producto.nombre}"></h2>
+								<ul class="list-group">
+									<li class="list-group-item">
+										<h5
+											th:text="'Precio: ' + ${#strings.concat('$', #numbers.formatDecimal(producto.precio, 0, 'POINT',0, 'POINT'))}">
+										</h5>
 									</li>
 									<li class="list-group-item">
 										<p th:text="'Descripcion: ' + ${producto.descripcion}"></p>
